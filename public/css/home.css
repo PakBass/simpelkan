@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+html {
+    height: 100%;
+    margin: 0;
+}
+body {
+	background: linear-gradient(90deg, #C7C5F4, #776BCC);
+    height: 100%;
+    margin: 0;
+}
+
+img.footer-img {
+    width: 100%;
+    height: auto;
+    margin-top: -300px;
+}
+
+.logo {
+    text-align: center;
+    margin-top: 20px; /* Pusatkan logo */
+}
+
+.logo img {
+    width: 100px; /* Atur lebar logo sesuai keinginan */
+    height: auto;
+}
+
+.card {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .sidebar {
+    background-color: #f8f9fa; /* Warna latar belakang sidebar */
+    min-height: 100vh; /* Sesuaikan tinggi sesuai kebutuhan */
+    border-right: 1px solid #d6d8db; /* Garis tepi sidebar */
+}
+
+/* Stil untuk judul sidebar */
+.sidebar-title {
+    font-size: 1.2rem; /* Ukuran font judul sidebar */
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Stil untuk menu di sidebar */
+.sidebar-menu li {
+    list-style: none;
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: #000; /* Warna teks menu */
+}
+
+.sidebar-menu a:hover {
+    color: #007bff; /* Warna teks menu saat dihover */
+}
