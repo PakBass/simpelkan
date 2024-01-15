@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/img/favicon.ico') }}">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -414,7 +414,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row d-flex">
-                                                    <div class="col-md-6 mb-3">
+                                                    <div class="col-md-12 mb-3">
                                                         <div class="form-check">
                                                             <input type="checkbox" class="btn-check"
                                                                 id="btn-check-2-outlined" value="1" name="approve"
@@ -422,6 +422,13 @@
                                                             <label class="btn btn-outline-danger"
                                                                 for="btn-check-2-outlined">
                                                                 <i class="bi bi-file-earmark-check"></i> AKTIFASI AKUN
+                                                            </label>
+                                                            <input type="checkbox" class="btn-check"
+                                                                id="btn-check-2-outlined 2" value="0" name="unlogin"
+                                                                {{ $post->unlogin ? '' : 'checked' }}>
+                                                            <label class="btn btn-outline-primary"
+                                                                for="btn-check-2-outlined 2">
+                                                                <i class="bi bi-lock-fill"></i> Lock Account
                                                             </label>
                                                         </div>
                                                     </div>

@@ -20,11 +20,14 @@ Route::group(['middleware' => 'revalidate','approved'], function()
     Route::resource('/pencegahan', PencegahanController::class)->middleware('auth');
     Route::get('/keselamatan', [KeselamatanController::class, 'index'])->name('keselamatan')->middleware('auth');
     Route::get('/radio', [RadioController::class, 'index'])->name('radio')->middleware('auth');
-    Route::get('/permohonan',[PermohonanController::class, 'index'])->name('permohoan')->middleware('auth');
+    Route::get('/permohonan',[PermohonanController::class, 'index'])->name('permohonan')->middleware('auth');
+    Route::get('/dataPermohonan',[PermohonanController::class, 'permohonanBaru'])->name('dataPermohonan')->middleware('auth');
     Route::get('home', [PostController::class, 'index'])->name('home')->middleware('auth');
     Route::get('/approval', [HomeController::class, 'approval'])->name('approval')->middleware('auth');
+    Route::get('/approval2', [HomeController::class, 'unlogin'])->name('unlogin')->middleware('auth');
     Route::get('/profile', [PostController::class, 'profile'])->name('profile')->middleware('auth');
     Route::post('/ubahData', [PostController::class, 'ubahData'])->name('ubahData')->middleware('auth');
+    Route::post('/daftar',[PermohonanController::class, 'daftar'])->name('daftar')->middleware('auth');
 });
 
 Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');

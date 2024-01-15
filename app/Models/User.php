@@ -40,6 +40,7 @@ class User extends Authenticatable
         'file_npwp', '
         file_siup',
         'approved',
+        'unlogin',
     ];
 
 

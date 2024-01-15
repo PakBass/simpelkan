@@ -11,4 +11,6 @@ class KeselamatanController extends Controller
             'title' => 'Laporan Keselamatan Perlengkapan Kapal Barang'
         ]);
     }
+
+    
 }

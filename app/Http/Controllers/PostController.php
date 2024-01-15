@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PostModel;
 use App\Models\User;
+use App\Models\Permohonan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -47,33 +48,106 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        // $this->validate($request, [
+        //     'title'     => 'required|string|max:155',
+        //     'content'   => 'required',
+        //     'status'    => 'required'
+        // ]);
+
+        // $post = PostModel::create([
+        //     'title'     => $request->title,
+        //     'content'   => $request->content,
+        //     'status'    => $request->status,
+        //     'slug'      => Str::slug($request->title),
+        //     'user_id'   => Auth()->user()->id
+        // ]);
+
+        // if ($post) {
+        //     return redirect()
+        //         ->route('home')
+        //         ->with([
+        //             'success' => 'New post has been created successfully'
+        //         ]);
+        // } else {
+        //     return redirect()
+        //         ->back()
+        //         ->withInput()
+        //         ->with([
+        //             'error' => 'Some problem occurred, please try again'
+        //         ]);
+        // }
         $this->validate($request, [
-            'title'     => 'required|string|max:155',
-            'content'   => 'required',
-            'status'    => 'required'
+            'namaKapal' => 'required|string|max:255',
+            'jenisKapal' =>'required|string|max:255',
+            'jenisLayanan' => 'required|string|max:255',
+            'ditujukan' => 'required|string|max:255',
+            'nomor' => 'required|string|max:255',
+            'tanggalSurat' => 'required|string|max:255',
+            'perihal' => 'required|string|max:255',
+            'gt' => 'required|string|max:255',
+            'callSign' => 'required|string|max:255',
+            'pemilik' => 'required|string|max:255',
+            'file_suratPermohoan' => 'mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_ukurKapal' => 'mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_stkk' => 'mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_pelengkapan' => 'mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_konstruksi' => 'mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_radio' => 'mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_klassifikasi' => 'mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_ilr_pmk' => 'mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_pemeriksaan' => 'mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_docking1' => 'mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_docking2' => 'mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
+        try {
+            $user = Permohonan::create([
+                'namaKapal' => $request->namaKapal,
+                'jenisKapal' =>$request->jenisKapal,
+                'jenisLayanan' => $request->jenisLayanan,
+                'ditujukan' => $request->ditujukan,
+                'nomor' => $request->nomor,
+                'tanggalSurat' => $request->tanggalSurat,
+                'perihal' => $request->perihal,
+                'gt' => $request->gt,
+                'callSign' => $request->callSign,
+                'pemilik' => $request->pemilik,
+            ]);
+            if ($user) {
+                // Simpan file-file
+                $fileTypes = [
+                    'file_suratPermohoan',
+                    'file_ukurKapal',
+                    'file_stkk',
+                    'file_pelengkapan',
+                    'file_konstruksi',
+                    'file_radio',
+                    'file_klassifikasi',
+                    'file_ilr_pmk',
+                    'file_pemeriksaan',
+                    'file_docking1',
+                    'file_docking2',
+                ];
 
-        $post = PostModel::create([
-            'title'     => $request->title,
-            'content'   => $request->content,
-            'status'    => $request->status,
-            'slug'      => Str::slug($request->title),
-            'user_id'   => Auth()->user()->id
-        ]);
+                foreach ($fileTypes as $fileType) {
+                    if ($request->hasFile($fileType)) {
+                        $file = $request->file($fileType);
+                        $fileName = time() . '_' . $file->getClientOriginalName();
+                        $file->storeAs('documents', $fileName, 'public');
+                        $user->{$fileType} = asset('storage/documents/' . $fileName); // Mengubah nilai file ke URL yang benar
+                    }
+                }
 
-        if ($post) {
-            return redirect()
-                ->route('home')
-                ->with([
-                    'success' => 'New post has been created successfully'
-                ]);
-        } else {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with([
-                    'error' => 'Some problem occurred, please try again'
-                ]);
+                $user->save();
+
+                session()->flash('success', 'Data berhasil terkirim! Tunggu validasi admin untuk penerbitan SPT.');
+                return redirect('/');
+            } else {
+                session()->flash('error', 'Terjadi kesalahan saat membuat pengguna. Silakan coba lagi.');
+                return back()->withInput();
+            }
+        } catch (\Exception $e) {
+            // Tangani error (jika ada) tanpa melakukan redirect
+            return back()->withInput()->withErrors(['trouble' => 'Terjadi kesalahan. Silakan coba lagi.']);
         }
     }
 
@@ -94,12 +168,8 @@ class PostController extends Controller
                 'email' => $request->email,
                 'username' => $request->username,
                 'approved' => $request->input('approve', 0), // Mengambil nilai dari checkbox, defaultnya adalah 0 jika checkbox tidak tercentang
+                'unlogin'  => $request->input('unlogin', 1),
             ];
-
-            // Periksa apakah password diisi atau tidak
-            if ($request->filled('password')) {
-                $userData['password'] = bcrypt($request->password);
-            }
 
             $user->update($userData);
 
@@ -122,6 +192,16 @@ class PostController extends Controller
             $user = User::findOrFail($id);
 
             $validasiData = $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email',
+                'username' => 'required|string',
+                'password' => 'nullable|string|min:8',
+                'nama_perusahaan' => 'required|string',
+                'siup' => 'required|string',
+                'nib' => 'required|string',
+                'alamat' => 'required|string',
+                'pic' => 'required|string',
+                'no_telepon' => 'required|string',
                 'file_akte' => 'mimes:pdf,jpg,jpeg,png|max:2048',
                 'file_nib' => 'mimes:pdf,jpg,jpeg,png|max:2048',
                 'file_npwp' => 'mimes:pdf,jpg,jpeg,png|max:2048',
@@ -142,8 +222,15 @@ class PostController extends Controller
             ]);
 
             try {
-                $user->update($validasiData);
+                 // Hanya mengupdate password jika ada input password baru
+                    if ($request->filled('password')) {
+                        $validasiData['password'] = Hash::make($request->password);
+                    } else {
+                        // Jika password tidak diubah, pertahankan password lama
+                        unset($validasiData['password']);
+                    }
 
+                $user->update($validasiData);
                 // Simpan file-file
                 $fileTypes = ['file_akte', 'file_nib', 'file_npwp', 'file_siup'];
 
@@ -230,7 +317,7 @@ class PostController extends Controller
             'alamat' => $request->alamat,
             'pic' => $request->pic,
             'no_telepon' => $request->no_telepon,
-            'approved' => $request->approved,
+            // 'approved' => $request->approved,
         ];
 
         // Periksa apakah password diisi atau tidak

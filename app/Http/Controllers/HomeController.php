@@ -11,4 +11,10 @@ class HomeController extends Controller
             'title' => 'Approval'
         ]);
     }
+
+    public function unlogin() {
+        return view('approval2', [
+            'title' => 'Deactivated'
+        ]);
+    }
 }

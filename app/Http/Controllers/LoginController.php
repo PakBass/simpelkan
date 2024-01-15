@@ -38,34 +38,23 @@ class LoginController extends Controller
         $credentials = $request->only('identity', 'password');
 
         if (Auth::attempt(['email' => $credentials['identity'], 'password' => $credentials['password']])) {
-            // Otentikasi berhasil. Cek status 'approved'.
             $user = Auth::user();
-
-            // if ($user->approved) {
-            //     return redirect()->intended('home');
-            // } else {
-            //     return redirect('/approval')->with('notAprooved', 'Akun Anda belum disetujui oleh admin.');
-            // }
-            $credentials = $request->only('identity', 'password');
-
-            if (Auth::attempt(['email' => $credentials['identity'], 'password' => $credentials['password']])) {
-                // Otentikasi berhasil. Redirect ke halaman yang sesuai.
-                return redirect()->intended('home');
+            if ($user->unlogin == 0) {
+                return redirect('/approval2')->with('error', 'Akun Anda Sudah Tidak Bisa Digunakan Lagi!.');
             }
+            return redirect()->intended('home');
         }
 
         if (Auth::attempt(['username' => $credentials['identity'], 'password' => $credentials['password']])) {
-            // Otentikasi berhasil. Cek status 'approved'.
             $user = Auth::user();
-
-            if ($user->approved == 0) {
-                return redirect()->intended('home');
-            } else {
-                return redirect('/approval')->with('notAprooved', 'Akun Anda belum disetujui oleh admin.');
+            if ($user->unlogin == 0) {
+                return redirect('/approval2')->with('error', 'Akun Anda Sudah Tidak Bisa Digunakan Lagi!.');
             }
+            return redirect()->intended('home');
         }
 
         return redirect('/')->with('error', 'Email atau Password salah');
+
     }
 
     public function register(Request $request)

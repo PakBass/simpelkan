@@ -3,7 +3,9 @@
 
 <head>
     <title>{{ $title }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style3.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/img/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -45,52 +47,65 @@
 
 <body>
     <div class="container">
-        <div class="screen">
-            <div class="screen__content">
-                <div class="logo">
-                    <img src="{{ asset('storage/image/simpelkan.png') }}" alt="Logo">
-                    <img src="{{ asset('storage/image/logo.png') }}" alt="Logo">
+        <div class="d-flex justify-content-center align-items-center flex-wrap">
+            <div class="content">
+                <div class="h2 text-white"><strong>SIMPELKAN</strong></div>
+                <div class="fs-5 text-white text-grey">Sistem Pelayanan Elektronik Kelaiklautan Kapal</div>
+                <div class="text my-4 text-white text-justify">
+                    <p>SIMPELKAN v.1.0 adalah sistem pelayanan kelaiklautan kapal versi 1.0 yang dikembangkan untuk meningkatkan efektifitas pelayanan kepada pengguna jasa.</p>
+                    <p>Saat ini SIMPELKAN v.1.0 terus melakukan pengembangan sistem guna mencapai pelayanan yangterbaik untuk pengguna jasa. </p>
                 </div>
-                <form class="login" action="/actionlogin" method="POST" id="loginForm">
-                    @csrf
-                    <h2>Login Area</h2>
-                    <div class="login__field">
-                        <i class="bi bi-person-check-fill"></i>
-                        <input type="text" name="identity" class="login__input" placeholder="Email atau Username"
-                            autocomplete="off">
+                <div class="d-flex align-items-center text-white mt-4">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#registrationModal"><span class="badge text-bg-warning">Klik disini</span></a>
+                </div>
+            </div>
+            <div class="form-card">
+                <div class="container">
+                    <div class="screen">
+                        <div class="screen__content">
+                            <div class="logo">
+                                <img src="{{ asset('storage/image/simpelkan.png') }}" alt="Logo">
+                                <img src="{{ asset('storage/image/logo.png') }}" alt="Logo">
+                            </div>
+                            <form class="login" action="/actionlogin" method="POST" id="loginForm">
+                                @csrf
+                                <h2>Login Area</h2>
+                                <div class="login__field">
+                                    <i class="bi bi-person-check-fill"></i>
+                                    <input type="text" name="identity" class="login__input" placeholder="Email atau Username"
+                                        autocomplete="off">
+                                </div>
+                                {!! $errors->first('identity', '<small class="text-danger">:message</small>') !!}
+                                <div class="login__field">
+                                    <i class="bi bi-key-fill"></i>
+                                    <input type="password" name="password" class="login__input" placeholder="Password" value="{{ old('password') }}">
+                                </div>
+                                {{-- {!! $errors->first('password', '<small class="text-danger">:message</small>') !!} --}}
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="bi bi-box-arrow-in-right"></i> Log In Now
+                                </button>
+                                <span id="loading" class="d-none">
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Loading...
+                                </span>
+                            </form>
+                            <div class="register-link mb-3">
+                                <label for="reg">Belum punya akun ?</label>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#registrationModal"><span class="badge text-bg-warning">Klik disini</span></a>
+                            </div>
+                        </div>
+                        <div class="screen__background">
+                            <span class="screen__background__shape screen__background__shape4"></span>
+                            <span class="screen__background__shape screen__background__shape3"></span>
+                            <span class="screen__background__shape screen__background__shape2"></span>
+                            <span class="screen__background__shape screen__background__shape1"></span>
+                        </div>
                     </div>
-                    {!! $errors->first('identity', '<small class="text-danger">:message</small>') !!}
-                    <div class="login__field">
-                        <i class="bi bi-key-fill"></i>
-                        <input type="password" name="password" class="login__input" placeholder="Password" value="{{ old('password') }}">
-                    </div>
-                    {{-- {!! $errors->first('password', '<small class="text-danger">:message</small>') !!} --}}
-                    <button class="btn btn-primary" type="submit">
-                        <i class="bi bi-box-arrow-in-right"></i> Log In Now
-                    </button>
-                    <span id="loading" class="d-none">
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <div id="loading" style="display: none;">
                         Loading...
-                    </span>
-                </form>
-                <div class="register-link mb-3">
-                    <label for="reg">Belum punya akun ?</label>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#registrationModal"><span
-                            class="badge text-bg-warning">Klik disini</span></a>
-                    {{-- <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registrationModal">
-                        Klik disini
-                    </button> --}}
+                    </div>
                 </div>
             </div>
-            <div class="screen__background">
-                <span class="screen__background__shape screen__background__shape4"></span>
-                <span class="screen__background__shape screen__background__shape3"></span>
-                <span class="screen__background__shape screen__background__shape2"></span>
-                <span class="screen__background__shape screen__background__shape1"></span>
-            </div>
-        </div>
-        <div id="loading" style="display: none;">
-            Loading...
         </div>
     </div>
     <img class="footer-img" src="{{ asset('storage/image/footer-bg.png') }}" alt="">
@@ -323,17 +338,6 @@
             });
         </script>
     @endif
-
-    {{-- @if (session('success'))
-    <script>
-        swal({
-            title: "Registrasi Berhasil!",
-            text: "Silakan login.",
-            icon: "success",
-            button: "OK",
-        });
-    </script>
-    @endif --}}
 
     @if (session('error'))
         <script>

@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('file_npwp')->nullable();;
             $table->string('file_siup')->nullable();;
             $table->boolean('approved')->default(false); // Tambahkan kolom untuk approval dari admin
-            // $table->boolean('form_btn')->default(false); // Tambahkan kolom untuk form_btn dari admin
+            $table->boolean('unlogin')->default(true); // Tambahkan kolom untuk unlogin dari admin
             $table->rememberToken();
             $table->timestamps();
         });

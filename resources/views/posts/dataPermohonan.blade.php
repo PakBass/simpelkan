@@ -84,7 +84,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link">
+            <a href="/home" class="brand-link">
                 <img src="{{ asset('storage/image/simpelkan.png') }}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 @can('isAdmin')
                     <span class="brand-text font-weight-light">Administrator</span>
@@ -136,7 +136,7 @@
                         @endcan
                         @can('isAdmin')
                             <li class="nav-item">
-                                <a href="/" class="nav-link">
+                                <a href="/home" class="nav-link">
                                     <i class="nav-icon far fa-image"></i>
                                     <p>
                                         Data Pemohon
@@ -144,7 +144,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/dataPermohonan" class="nav-link">
+                                <a href="" class="nav-link">
                                     <i class="nav-icon far fa-image"></i>
                                     <p>
                                         Data Permohonan Baru
@@ -247,58 +247,10 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="card">
-                                        <div class="card-body table-responsive p-0">
-                                            <table class="table table-striped table-valign-middle">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center" scope="col">No.</th>
-                                                        <th scope="col">Full Name</th>
-                                                        <th scope="col">Username</th>
-                                                        <th scope="col">Email</th>
-                                                        <th scope="col">Registered At</th>
-                                                        <th scope="col">Role</th>
-                                                        <th class="text-center" scope="col">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @forelse ($posts as $key => $post)
-                                                        <tr>
-                                                            <td class="text-center">{{ $key + $posts->firstItem() }}</td>
-                                                            <td>{{ $post->name }}</td>
-                                                            <td>{{ $post->username }}</td>
-                                                            <td>{{ $post->email }}</td>
-                                                            <td>{{ $post->created_at->format('d-m-Y') }}</td>
-                                                            <td><span class="badge text-bg-danger text-white mx-3">{{ $post->role }}</span></td>
-                                                            <td class="text-center mb-3">
-                                                                <form onsubmit="return confirmDelete();" id="delete-form" action="{{ route('post.destroy', ['post' => $post->id]) }}" method="POST">
-                                                                    @method('DELETE')
-                                                                    <a href="{{ route('post.edit', $post->id) }}"
-                                                                        class="btn btn-sm btn-primary"><i
-                                                                            class="bi bi-pencil-square"></i></a>
-                                                                    @csrf
-                                                                    {{-- @can('isAdmin')
-                                                                        <button type="submit"
-                                                                            class="btn btn-sm btn-danger"><i
-                                                                                class="bi bi-trash-fill"></i></button>
-                                                                    @elsecan('isPemohon')
-                                                                        <button type="submit"
-                                                                            class="btn btn-sm btn-danger"><i
-                                                                                class="bi bi-trash-fill"></i></button>
-                                                                    @endcan --}}
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-                                                    @empty
-                                                        <tr>
-                                                            <td class="text-center text-mute" colspan="4">Data post
-                                                                tidak tersedia</td>
-                                                        </tr>
-                                                    @endforelse
-                                                </tbody>
-                                            </table>
+                                        <div class="card-body table-responsive p-4">
+                                            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7mZ2MZgV9c2Sd5OKYI_DVSGKIwef51cvhG_zAeYq71SmOrsLxxQW8QbIOs52LH-2SSlFrQ-0vxqDO/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="1000"></iframe>
                                         </div>
                                     </div>
-                                    {{ $posts->links() }}
                                 </div>
                             </div>
                             <!-- /.row -->
