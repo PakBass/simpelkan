@@ -17,4 +17,10 @@ class HomeController extends Controller
             'title' => 'Deactivated'
         ]);
     }
+
+    public function cetak() {
+        return view('posts.cetakSpk', [
+            'title'     => 'Cetak SPK'
+        ]);
+    }
 }

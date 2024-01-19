@@ -151,6 +151,14 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="/cetak" class="nav-link">
+                                    <i class="nav-icon far fa-image"></i>
+                                    <p>
+                                        Cetak SPK
+                                    </p>
+                                </a>
+                            </li>
                         @endcan
                         @can('isPemeriksa')
                             <li class="nav-item">
@@ -248,7 +256,7 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-body table-responsive p-4">
-                                            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7mZ2MZgV9c2Sd5OKYI_DVSGKIwef51cvhG_zAeYq71SmOrsLxxQW8QbIOs52LH-2SSlFrQ-0vxqDO/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="1000"></iframe>
+                                            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSb0E51grKTnZx5_0ie7WV6_gUdK4wWeytdDXtp5Tf50menKJEJZ3gnW05h9Rsj0dMM2Ggjg4hZwJ_L/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="800"></iframe>
                                         </div>
                                     </div>
                                 </div>

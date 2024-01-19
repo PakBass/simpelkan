@@ -247,7 +247,7 @@
                     <div class="container mt-4">
                         <div class="row mb-2">
                             <div class="col-sm-6 mt-5">
-                                <h4 class="mb-4"><span class="badge text-bg-warning text-black mx-3">Formulir Permohonan Baru</span></h4>
+                                <h4 class="mb-4"><span class="badge text-bg-warning text-black">Formulir Permohonan Baru</span></h4>
                             </div><!-- /.col -->
                         </div>
                     </div>

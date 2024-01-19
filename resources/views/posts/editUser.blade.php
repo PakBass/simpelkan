@@ -122,7 +122,15 @@
                         <li class="nav-header">MENU</li>
                         @can('isPemohon')
                             <li class="nav-item">
-                                <a href="/permohonan" class="nav-link">
+                                <a href="/profile" class="nav-link">
+                                    <i class="nav-icon fas fa-calendar-alt"></i>
+                                    <p>
+                                        Profile Pemohon
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/permohonan" class="nav-link permohonanBtn">
                                     <i class="nav-icon fas fa-calendar-alt"></i>
                                     <p>
                                         Forn Permohonan Baru
@@ -132,10 +140,26 @@
                         @endcan
                         @can('isAdmin')
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/" class="nav-link">
                                     <i class="nav-icon far fa-image"></i>
                                     <p>
                                         Data Pemohon
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/dataPermohonan" class="nav-link">
+                                    <i class="nav-icon far fa-image"></i>
+                                    <p>
+                                        Data Permohonan Baru
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/cetak" class="nav-link">
+                                    <i class="nav-icon far fa-image"></i>
+                                    <p>
+                                        Cetak SPK
                                     </p>
                                 </a>
                             </li>

@@ -28,6 +28,7 @@ Route::group(['middleware' => 'revalidate','approved'], function()
     Route::get('/profile', [PostController::class, 'profile'])->name('profile')->middleware('auth');
     Route::post('/ubahData', [PostController::class, 'ubahData'])->name('ubahData')->middleware('auth');
     Route::post('/daftar',[PermohonanController::class, 'daftar'])->name('daftar')->middleware('auth');
+    Route::get('/cetak', [HomeController::class, 'cetak'])->name('cetak')->middleware('auth');
 });
 
 Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');

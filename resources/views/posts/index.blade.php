@@ -151,6 +151,14 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="/cetak" class="nav-link">
+                                    <i class="nav-icon far fa-image"></i>
+                                    <p>
+                                        Cetak SPK
+                                    </p>
+                                </a>
+                            </li>
                         @endcan
                         @can('isPemeriksa')
                             <li class="nav-item">
